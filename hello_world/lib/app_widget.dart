@@ -1,8 +1,8 @@
 //Stateless = sem alteração, usado pra coisas estáticas.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/home_page.dart';
 import 'package:hello_world/app_controller.dart';
+import 'package:hello_world/login_page.dart';
 import 'package:hello_world/themes/Themes.dart';
 
 class AppWidget extends StatelessWidget {
@@ -18,7 +18,7 @@ class AppWidget extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           title: title,
-          home: HomePage(),
+          home: LoginPage(),
           theme: appController.isDarkTheme ? Themes.darkTheme() : Themes.lightTheme(),
         );
       },
