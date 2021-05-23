@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   height: 150,
                   width: 150,
-                  child: Image.network('https://image.flaticon.com/icons/png/512/57/57451.png'),
+                  child: Image.asset('assets/imagens/logo.png'),
                 ),
 
                 SizedBox(height: 20),
