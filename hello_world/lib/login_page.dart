@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -15,9 +14,9 @@ class _LoginPageState extends State<LoginPage> {
 
   void _doLogin(BuildContext context) {
     if (_email == 'ray@gmail.com' && _password == '123') {
-      //push = apenas joga a nova página por cima, poe um botão de voltar no appBar
-      //pushReplacement = fazer com que a página atual suma mesmo.
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
+      //PushNamed = apenas joga a nova página por cima, poe um botão de voltar no appBar
+      //pushReplacementNamed = fazer com que a página atual suma mesmo.
+      Navigator.of(context).pushReplacementNamed('/home');
     } else {
       showDialog(
           context: context,
