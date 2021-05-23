@@ -36,61 +36,89 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: SizedBox(
-          //pegando valor da tela. por que double.infinite nao funcionaria pra SingleChildScrollView
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 150,
-                  width: 150,
-                  child: Image.asset('assets/imagens/logo.png'),
-                ),
+  Widget _body() {
+    return SingleChildScrollView(
+      child: SizedBox(
+        //pegando valor da tela. por que double.infinite nao funcionaria pra SingleChildScrollView
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
+        height: MediaQuery
+            .of(context)
+            .size
+            .height,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 150,
+                width: 150,
+                child: Image.asset('assets/imagens/logo.png'),
+              ),
 
-                SizedBox(height: 20),
+              SizedBox(height: 20),
 
-                TextField(
-                  onChanged: (email) {
-                    _email = email;
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                  //configurando teclado pra ser email
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Email',
+              Card(
+                color: Colors.black.withOpacity(0.3),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    children: [
+                      TextField(
+                        onChanged: (email) {
+                          _email = email;
+                        },
+                        keyboardType: TextInputType.emailAddress,
+                        //configurando teclado pra ser email
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Email',
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      TextField(
+                        onChanged: (password) {
+                          _password = password;
+                        },
+                        obscureText: true, // deixar o campo como senha
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Password',
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      Container(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _doLogin(context);
+                          },
+                          child: Text('Entrar', style: TextStyle(color: Colors.white),),
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                SizedBox(height: 10),
-                TextField(
-                  onChanged: (password) {
-                    _password = password;
-                  },
-                  obscureText: true, // deixar o campo como senha
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Password',
-                  ),
-                ),
-                SizedBox(height: 15),
-                ElevatedButton(
-                  onPressed: () {
-                    _doLogin(context);
-                  },
-                  child: Text('Entrar'),
-                )
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Stack(
+          children: [
+            Container(color: Colors.blue), // pela ordem, o de cima, fica embaixo
+            _body(), // esse ficará em cima
+          ],
+        )
     );
   }
 }
