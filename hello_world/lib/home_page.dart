@@ -31,10 +31,18 @@ class HomePageState extends State<HomePage> {
               title: Text('Home Page'),
               actions: [CustomSwitch()],
             ),
-            body: Center(
-                child: GestureDetector(
-              child: CustomSwitch(),
-            )),
+            body: Container(
+              width: double.infinity, //pegando toda a tela
+              height: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center, // eixo y
+                crossAxisAlignment: CrossAxisAlignment.center, // eixo x
+                children: [
+                  Text('Contador: $counter', style: TextStyle(fontSize: 30.0)),
+                  CustomSwitch()
+                ],
+              ),
+            ),
             floatingActionButton: FloatingActionButton(
               child: Icon(Icons.add),
               onPressed: () {
