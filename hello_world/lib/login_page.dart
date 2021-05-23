@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hello_world/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -11,11 +13,27 @@ class _LoginPageState extends State<LoginPage> {
   String _email = '';
   String _password = '';
 
-  void _doLogin() {
-    if (_email == 'ray@gmail.com' && _password == '123'){
-      print('Success!');
-    }else{
-      print('Login unsuccessful. Try again');
+  void _doLogin(BuildContext context) {
+    if (_email == 'ray@gmail.com' && _password == '123') {
+      //push = apenas joga a nova página por cima, poe um botão de voltar no appBar
+      //pushReplacement = fazer com que a página atual suma mesmo.
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
+    } else {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+                title: Text('Erro'),
+                content: Text('Login ou senha estão incorretos.'),
+                actions: [
+                  TextButton(
+                    child: Text("Ok"),
+                    onPressed: () {
+                      Navigator.of(context).pop(); //faz sumir
+                    },
+                  ),
+                ]);
+          });
     }
   }
 
@@ -57,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 15),
                 ElevatedButton(
                   onPressed: () {
-                    _doLogin();
+                    _doLogin(context);
                   },
                   child: Text('Entrar'),
                 )
