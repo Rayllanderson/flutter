@@ -9,29 +9,65 @@ class HomeView extends StatelessWidget {
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            Container(child: Image.asset('assets/images/logo.png')),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: DropdownButton(
-                      items: [],
-                      onChanged: (value) {},
+        child: Padding(
+          padding: EdgeInsets.only(top: 100, left: 20, right: 20),
+          child: Column(
+            children: [
+              Image.asset('assets/images/logo.png', width: 150, height: 150),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: SizedBox(
+                        height: 56,
+                        child: DropdownButton(
+                          underline: Container(
+                            height: 1,
+                            color: Colors.amber,
+                          ),
+                          isExpanded: true,
+                          items: [
+                            DropdownMenuItem(child: Text('Real')),
+                            DropdownMenuItem(child: Text('Dólar'))
+                          ],
+                          onChanged: (value) {},
+                        ),
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(),
+                    SizedBox(
+                      width: 10,
                     ),
-                  ),
-                ],
+                    Expanded(
+                      flex: 2,
+                      child: TextField(
+                        decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.amber)
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.amber)
+                            )
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            ElevatedButton(onPressed: () {}, child: Text('CONVERTER'))
-          ],
+              SizedBox(
+                height: 50,
+              ),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.amber,
+                  ),
+                  onPressed: () {},
+                  child:
+                      Text('CONVERTER', style: TextStyle(color: Colors.black)))
+            ],
+          ),
         ),
       ),
     );
