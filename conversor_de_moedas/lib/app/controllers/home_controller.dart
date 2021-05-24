@@ -20,7 +20,7 @@ class HomeController {
     double value = double.tryParse(text.replaceAll(',', '.')) ?? 1.0;
     double returnValue;
 
-    switch (fromCurrency.name) {
+    switch (fromCurrency.currencyName) {
       case CurrencyName.real:
         returnValue = value * toCurrency.real;
         break;
