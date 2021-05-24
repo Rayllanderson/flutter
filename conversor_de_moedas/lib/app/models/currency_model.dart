@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
+
 class CurrencyModel {
-  final String name;
+  final CurrencyName name;
   final double real;
   final double dolar;
   final double euro;
@@ -10,17 +12,38 @@ class CurrencyModel {
   static List<CurrencyModel> getCurrencies() {
     return <CurrencyModel>[
       CurrencyModel(
-          name: 'Real', real: 1.0, dolar: 0.18, euro: 0.15, bitcoin: 0.000016),
+          name: CurrencyName.real, real: 1.0, dolar: 0.18, euro: 0.15, bitcoin: 0.000016),
       CurrencyModel(
-          name: 'Dólar', real: 5.63, dolar: 1.0, euro: 0.85, bitcoin: 0.000088),
+          name: CurrencyName.dolar, real: 5.63, dolar: 1.0, euro: 0.85, bitcoin: 0.000088),
       CurrencyModel(
-          name: 'Euro', real: 6.62, dolar: 1.17, euro: 1.0, bitcoin: 0.00010),
+          name: CurrencyName.euro, real: 6.62, dolar: 1.17, euro: 1.0, bitcoin: 0.00010),
       CurrencyModel(
-          name: 'Bitcoin',
+          name: CurrencyName.bitcoin,
           real: 64116.51,
           dolar: 11351.30,
           euro: 9689.34,
           bitcoin: 1.0),
     ];
+  }
+}
+
+enum CurrencyName{
+  real, dolar, euro, bitcoin
+}
+
+extension CurrencyNameExtension on CurrencyName{
+  String get name {
+    switch(this){
+      case CurrencyName.real:
+        return 'Real';
+      case CurrencyName.dolar:
+        return 'Dólar';
+      case CurrencyName.euro:
+        return 'Euro';
+      case CurrencyName.bitcoin:
+        return 'Bitcoin';
+      default:
+        return '';
+    }
   }
 }
