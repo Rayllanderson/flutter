@@ -97,7 +97,13 @@ class _HomePageState extends State<HomePage> {
         builder: (context, child) {
           return _stateManagement(controller.state.value);
         },
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
