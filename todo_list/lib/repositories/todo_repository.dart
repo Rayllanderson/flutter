@@ -7,10 +7,6 @@ class TodoRepository{
 
   final url = 'https://jsonplaceholder.typicode.com/todos';
 
-  Future fetchTodos2() async{
-    dio.get(url).then((value) => null)
-  }
-
   Future<List<TodoModel>> fetchTodos() async {
     final response = await dio.get(url);
     return List.from(response.data)
