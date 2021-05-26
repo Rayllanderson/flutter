@@ -1,22 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:todo_list/models/todo_model.dart';
 import 'package:todo_list/repositories/todo_repository.dart';
 
 class HomeController {
   List<TodoModel> todos = [];
   final repository = TodoRepository();
-  HomeState state = HomeState.start;
+  final state = ValueNotifier<HomeState>(HomeState.start);
 
   Future start() async {
-    state = HomeState.loading;
-    todos = await repository
-        .fetchTodos()
-        .catchError((Object error) {
-          state = HomeState.error;
-        });
-    state = HomeState.success;
+    state.value = HomeState.loading;
+    try {
+      todos = await repository.fetchTodos();
+      state.value = HomeState.success;
+    } catch (err) {
+      state.value = HomeState.error;
+    }
   }
 }
 
-enum HomeState{
-  start, loading, success, error
-}
+enum HomeState { start, loading, success, error }

@@ -6,9 +6,9 @@ main(){
   final controller = HomeController();
 
   test('Deve preencher a lista de todos', () async {
-    expect(controller.state, HomeState.start);
+    expect(controller.state.value, HomeState.start);
     await controller.start();
-    expect(controller.state, HomeState.success);
+    expect(controller.state.value, HomeState.success);
     expect(controller.todos.isEmpty, false);
     expect(controller.todos.isNotEmpty, true);
   });

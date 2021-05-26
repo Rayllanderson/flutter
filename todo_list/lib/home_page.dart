@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/controllers/home_controller.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  final controller = HomeController();
 
   _success() {
     return ListView.builder(
-        itemCount: 20,
+        itemCount: controller.todos != null ? controller.todos.length : 0,
         itemBuilder: (context, index) {
+          var todo = controller.todos[index];
           return ListTile(
-            title: Text('Item $index'),
+            leading: Checkbox(value: todo.completed, onChanged: (value) {
+              setState(() {
+                todo.completed = !todo.completed;
+              });
+            },),
+            title: Text(todo.title),
           );
         });
   }
@@ -18,7 +32,7 @@ class HomePage extends StatelessWidget {
     return Center(
       child: ElevatedButton(
         onPressed: () {
-          //tentar novamente
+          refreshPage();
         },
         child: Text(message),
       ),
@@ -35,9 +49,9 @@ class HomePage extends StatelessWidget {
       children: [
         Center(
             child: Text(
-          'Bem vindo',
-          style: TextStyle(fontSize: 25),
-        )),
+              'Bem vindo',
+              style: TextStyle(fontSize: 25),
+            )),
         elevatedButtonCentered('Carregar Todo\'s')
       ],
     );
@@ -58,13 +72,32 @@ class HomePage extends StatelessWidget {
     }
   }
 
+  void refreshPage(){
+    controller.start();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    refreshPage();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Todo List'),
+        actions: [
+          IconButton(icon: Icon(Icons.refresh_outlined),
+              onPressed: refreshPage
+          )],
       ),
-      body: _stateManagement(HomeState.start),
+      body: AnimatedBuilder(
+        animation: controller.state,
+        builder: (context, child) {
+          return _stateManagement(controller.state.value);
+        },
+      )
     );
   }
 }
